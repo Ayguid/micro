@@ -65,8 +65,8 @@
                         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
                           <div class="card-body">
 
-                            <form class="form-inline">
-                              <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                            <form action="{{route('findProduct')}}" method="get" class="form-inline">
+                              <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="string">
                               <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                             </form>
 

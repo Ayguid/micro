@@ -17,7 +17,7 @@ class LandingController extends Controller
     if ($country = session('country')) {
       if ($id) {
         $cat=Category::find($id);
-        $products=$cat->productsInCountry($country->id)->paginate(5);
+        $products=$cat->productsInCountry($country->id)->paginate(25);
       }
       $categories=Category::where('parent_id', null)->get();
       $data=[

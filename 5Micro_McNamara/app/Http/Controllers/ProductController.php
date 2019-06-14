@@ -8,7 +8,6 @@ use DB;
 use App\Models440\Category;
 use App\Models440\Product;
 use App\Models440\Product_Attribute;
-use App\Models440\Attribute_Value;
 use App\Models440\Product_In_Country;
 
 
@@ -27,8 +26,6 @@ class ProductController extends Controller
   {
     //
   }
-
-
 
 
   /**
@@ -67,15 +64,19 @@ class ProductController extends Controller
         }
       }
 
+
       if ($request['attributes']) {
-        foreach ($request['attributes'] as $keyAtt => $valueAtt) {
-          $prodAttVal= new Product_Attribute();
-          $prodAttVal->product_id = $prod->id;
-          $prodAttVal->attribute_id = $keyAtt;
-          $prodAttVal->value = $valueAtt;
-          $save = $prodAttVal->save();
+      foreach ($request['attributes'] as $keyAtt => $valueAtt) {
+        if ($valueAtt) {
+          $prodAtt= new Product_Attribute();
+          $prodAtt->product_id = $prod->id;
+          $prodAtt->attribute_id = $keyAtt;
+          $prodAtt->value = $valueAtt;
+          $save = $prodAtt->save();
         }
       }
+    }
+
 
       if ($save)
       {
@@ -172,20 +173,28 @@ class ProductController extends Controller
         }
       }
 
+      if ($request['attributes'] ) {
+        // code...
 
       foreach ($request['attributes'] as $keyAtt => $valueAtt) {
-        if ($pa = $prod->attributeValue($keyAtt)) {
-          $pa->value = $valueAtt;
-          $pa->save();
+        if ($valueAtt) {
+          if ($pa = $prod->attributeValue($keyAtt)) {
+            $pa->value = $valueAtt;
+            $save = $pa->save();
+          }
+          else {
+            $prodAttr= new Product_Attribute;
+            $prodAttr->attribute_id=$keyAtt;
+            $prodAttr->product_id=$prod->id;
+            $prodAttr->value=$valueAtt;
+            $save = $prodAttr->save();
+          }
         }
-        else {
-          $prodAttr= new Product_Attribute;
-          $prodAttr->attribute_id=$keyAtt;
-          $prodAttr->product_id=$prod->id;
-          $prodAttr->value=$valueAtt;
-          $save = $prodAttr->save();
+        if (!$valueAtt && ($pd =  $prod->attributeValue($keyAtt))) {
+          $save = $pd->delete();
         }
       }
+    }
 
       if ($save)
       {
@@ -229,5 +238,16 @@ class ProductController extends Controller
       }
     });
   }
+
+
+  public function find(Request $request)
+  {
+    $products=Product::where('product_code', $request->string)->paginate(5);
+    $data=[
+      'products'=>$products
+    ];
+    return view('admin.products-view')->with('data', $data);
+  }
+
 
 }

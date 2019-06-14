@@ -68,6 +68,7 @@ Route::prefix('admin')->group(function(){
   Route::get('/editProduct/{id}', 'ProductController@edit')->name('editProduct');
   Route::post('/updateProduct', 'ProductController@update')->name('updateProduct');
   Route::delete('/deleteProduct/{id}','ProductController@destroy')->name('destroyProduct');
+  Route::get('/findProduct','ProductController@find')->name('findProduct');
 });
 
 
