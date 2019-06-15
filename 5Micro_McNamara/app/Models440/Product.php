@@ -8,6 +8,7 @@ use App\Models440\Product_Attribute;
 use App\Models440\Attribute;
 use App\Models440\Country;
 use App\Models440\Product_In_Country;
+use App\Models440\File;
 
 
 
@@ -17,7 +18,7 @@ class Product extends Model
   protected $table='products';
 
   protected $fillable = [
-    'category_id', 'titulo_es', 'titulo_en','titulo_pt','desc_es','desc_en','desc_pt','product_code', 'page',
+    'category_id', 'title_es', 'title_en','title_pt','desc_es','desc_en','desc_pt','product_code', 'page',
      'image_path', 'cad_2d', 'cad_3d','pdf_es','pdf_en','pdf_pt'
   ];
 
@@ -55,6 +56,11 @@ class Product extends Model
   }
 
 
+
+  public function files()
+  {
+    return $this->morphMany(File::class, 'fileable');
+  }
 
 
 

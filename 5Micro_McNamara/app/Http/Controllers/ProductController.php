@@ -141,7 +141,6 @@ class ProductController extends Controller
       $save = false;
       $prod = Product::find($request->product_id);
       $save = $prod->update($request->all());
-
       //delete
       foreach ($prod->possibleCountries() as $country) {
         $t = false;
@@ -174,8 +173,6 @@ class ProductController extends Controller
       }
 
       if ($request['attributes'] ) {
-        // code...
-
       foreach ($request['attributes'] as $keyAtt => $valueAtt) {
         if ($valueAtt) {
           if ($pa = $prod->attributeValue($keyAtt)) {

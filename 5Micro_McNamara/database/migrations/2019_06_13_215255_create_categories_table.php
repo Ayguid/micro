@@ -16,9 +16,9 @@ class CreateCategoriesTable extends Migration
     Schema::create('categories', function (Blueprint $table) {
       $table->bigIncrements('id');
       $table->integer('parent_id')->nullable();
-      $table->string('titulo_es');
-      $table->string('titulo_en')->nullable();
-      $table->string('titulo_pt')->nullable();
+      $table->string('title_es');
+      $table->string('title_en')->nullable();
+      $table->string('title_pt')->nullable();
       $table->string('desc_es');
       $table->string('desc_en')->nullable();
       $table->string('desc_pt')->nullable();

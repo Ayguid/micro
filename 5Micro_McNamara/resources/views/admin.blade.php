@@ -41,7 +41,7 @@
                             <div class="mb-2">
 
                             @foreach (App\Models440\Category::all()->where('parent_id', null) as $cat)
-                              <a href="{{route('showCategory', $cat->id)}}" class="btn btn-primary btn-lg btn-block">{{$cat->titulo_es}}</a>
+                              <a href="{{route('showCategory', $cat->id)}}" class="btn btn-primary btn-lg btn-block">{{$cat->title_es}}</a>
                             @endforeach
                           </div>
 

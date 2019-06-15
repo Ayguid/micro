@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
       @if ($category->parent_id)
-        <a href="{{route('showCategory', $category->parent_id)}}">{{$category->father()->first()->titulo_es}}</a>
+        <a href="{{route('showCategory', $category->parent_id)}}">{{$category->father()->first()->title_es}}</a>
       @endif
       <div class="col-md-6 col-md-offset-3">
         @if(Session::has('alert-success'))

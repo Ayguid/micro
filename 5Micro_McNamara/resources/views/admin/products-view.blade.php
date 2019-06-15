@@ -23,7 +23,7 @@
           {{$prod}}
           {{-- <div class="mt-2 border border-secondary p-2">
             <ul>
-              <li>{{$prod->titulo_es}}</li>
+              <li>{{$prod->title_es}}</li>
             </ul>
             @foreach ($prod->attributes()->get() as $pV)
               {{$pV->attribute->name}}<br>

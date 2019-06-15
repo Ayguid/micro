@@ -120,9 +120,8 @@ class CategoryController extends Controller
     return DB::transaction(function () use ($request, $id) {
     $save = false;
     $validator = Validator::make($request->all(), [
-      'titulo_es' => 'required|string|max:255',
+      'title_es' => 'required|string|max:255',
       'desc_es' => 'required|string|max:255',
-      // 'product_category' => 'required|integer|max:100',
     ]);
     if ($validator->fails())
     {
@@ -131,9 +130,7 @@ class CategoryController extends Controller
     else if (!$validator->fails())
     {
       $cat = Category::find($id);
-      $cat->desc_es = $request->desc_es;
-      $cat->titulo_es = $request->titulo_es;
-      $save =$cat->save();
+      $save = $cat->update($request->all());
     }
     if ($save)
     {

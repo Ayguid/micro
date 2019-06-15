@@ -15,11 +15,11 @@
     @isset($category)
       <h3>View</h3>
       @if ($category->parent_id)
-        <a href="{{route('showCategory', $category->parent_id)}}">{{$category->father()->first()->titulo_es}}</a>
+        <a href="{{route('showCategory', $category->parent_id)}}">{{$category->father()->first()->title_es}}</a>
       @endif
 
       <div class="">
-        <h3>{{$category->titulo_es}}</h3>
+        <h3>{{$category->title_es}}</h3>
       </div>
 
       <div class="row">
@@ -84,7 +84,7 @@
           <div class="row">
             @foreach ($category->children as $child)
               <div class="col-3">
-                <a href="{{route('showCategory', $child->id)}}" class="btn btn-primary btn-lg btn-block">{{$child->titulo_es}}</a>
+                <a href="{{route('showCategory', $child->id)}}" class="btn btn-primary btn-lg btn-block">{{$child->title_es}}</a>
               </div>
             @endforeach
           </div>
@@ -141,7 +141,7 @@
           @foreach ($pag = $category->products()->paginate(5) as $prod)
             <div class="mt-2 border border-secondary p-2">
               <ul>
-                <li>{{$prod->titulo_es}}</li>
+                <li>{{$prod->title_es}}</li>
               </ul>
               @foreach ($prod->attributes()->get() as $pV)
                 {{$pV->attribute->name}}<br>

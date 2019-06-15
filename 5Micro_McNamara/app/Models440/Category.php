@@ -16,7 +16,7 @@ class Category extends Model
     protected $table = 'categories';
 
     protected $fillable = [
-    'parent_id', 'titulo_es', 'titulo_en', 'titulo_pt', 'desc_es', 'desc_en', 'desc_pt', 'image_path'
+    'parent_id', 'title_es', 'title_en', 'title_pt', 'desc_es', 'desc_en', 'desc_pt', 'image_path'
     ];
 
 
