@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models440\Product_Attribute;
 use App\Models440\Attribute;
 use App\Models440\Country;
+use App\Models440\Category;
 use App\Models440\Product_In_Country;
 use App\Models440\File;
 
@@ -23,6 +24,10 @@ class Product extends Model
   ];
 
 
+  public function category()
+  {
+    return $this->hasOne(Category::class, 'id', 'category_id');
+  }
 
   public function attributes()
   {

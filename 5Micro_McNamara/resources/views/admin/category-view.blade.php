@@ -26,13 +26,13 @@
         <div class="col-6">
           <a href="{{route('editCategory', $category->id)}}" class="btn btn-primary">Edit</a>
         </div>
-        <div class="col-6">
+        {{-- <div class="col-6">
           <form class="" action="{{route('deleteCategory', $category->id)}}" method="post">
             @csrf
             <input name="_method" type="hidden" value="DELETE">
             <button type="submit" name="button" class="btn btn-danger">Delete</button>
           </form>
-        </div>
+        </div> --}}
       </div>
 
 
@@ -94,7 +94,7 @@
 
       <br>
 
-      @if (!$category->parent_id)
+      {{-- @if (!$category->parent_id)
       <div id="accordion">
         <div class="card">
           <div class="card-header" id="headingOne">
@@ -111,7 +111,7 @@
           </div>
         </div>
       </div>
-    @endif
+    @endif --}}
 
 
 

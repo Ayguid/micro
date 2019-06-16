@@ -63,6 +63,11 @@
         <input class="form-control{{ $errors->has($attr->name) ? ' is-invalid' : '' }}" type="text"
          name="attributes[{{$attr->id}}]" value="{{$value}}">
       @endif
+      @if ($attr->type=="password")
+        <label for="">{{$attr->name}}</label>
+        <input class="form-control{{ $errors->has($attr->name) ? ' is-invalid' : '' }}" type="password"
+         name="attributes[{{$attr->id}}]" value="{{$value}}">
+      @endif
     </div>
 
   </div>

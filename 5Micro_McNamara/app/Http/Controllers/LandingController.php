@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models440\Category;
 use App\Models440\Country;
+use App\Models440\Product;
 use App;
 
 class LandingController extends Controller
@@ -12,7 +13,7 @@ class LandingController extends Controller
   //
   public function index($id=null)
   {
-
+    $cat=null;
     $products=[];
     if ($country = session('country')) {
       if ($id) {
@@ -22,6 +23,7 @@ class LandingController extends Controller
       $categories=Category::where('parent_id', null)->get();
       $data=[
         'categories'=>$categories,
+        'category'=>$cat,
         'products'=>$products,
       ];
       return view('country_landing')->with('data', $data);
@@ -43,6 +45,23 @@ class LandingController extends Controller
     ]);
     return redirect(route('landing'));
   }
+
+
+  public function showProduct($id)
+  {
+    $product = Product::find($id);
+    $cat=Category::find($product->category_id);
+    $categories=Category::where('parent_id', null)->get();
+    $data=[
+      'categories'=>$categories,
+      'category'=>$cat,
+      'product'=> $product
+    ];
+    return view('product-view')->with('data', $data);
+  }
+
+
+
 
 
 }

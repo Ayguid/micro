@@ -1,6 +1,9 @@
 <form class="" action="{{route('addCatAttribute', $category->id)}}" method="post">
 {{ csrf_field() }}
 
+@php
+  $attr= new App\Models440\Attribute() ;
+@endphp
 
   <div class="form-group row">
     <div class="col-md-6">
@@ -11,14 +14,9 @@
   <input class="form-control" type="number" name="category_id" value="{{$category->id}}" hidden>
 
   <label for="Atributo">Tipo</label><br>
-  {{-- <input class="form-control" type="text" name="attribute_name" value=""> --}}
-  <input type="radio" value="string" name="type">string<br>
-  <input type="radio" value="int" name="type">int<br>
-  <input type="radio" value="float" name="type">float<br>
-  <input type="radio" value="date" name="type">date<br>
-  <input type="radio" value="mail" name="type">mail<br>
-  <input type="radio" value="password" name="type">password<br>
-  <input type="radio" value="textarea" name="type">textarea<br>
+  @foreach ($attr->types() as $key => $value)
+    <input type="radio" value="{{$value}}" name="type">{{$value}}<br>
+  @endforeach
 
 </div>
 </div>

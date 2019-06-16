@@ -27,11 +27,15 @@ Route::group([
   ],
   function(){
     Route::get('/', 'LandingController@index')->name('landing');
+    //
 
     //
     Route::get('/country/{id?}', 'LandingController@setCountry')->name('country_landing');
     //
     Route::get('/cat/{id?}', 'LandingController@index')->name('productsCat');
+    //
+    Route::get('/showProduct/{id}', 'LandingController@showProduct')->name('showProduct');
+    Route::get('/downloadFile/{path}', 'LandingController@downloadFile')->name('downloadFile');
     //
     Route::get('/home', 'HomeController@index')->name('home');
 
