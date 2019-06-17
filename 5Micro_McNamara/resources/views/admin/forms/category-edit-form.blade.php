@@ -1,3 +1,4 @@
+
 <form class="" action="{{route('updateCat', $category->id)}}" method="post">
 {{ csrf_field() }}
 @foreach ($category->getFillable() as $fKey => $fValue)

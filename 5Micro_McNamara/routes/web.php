@@ -35,7 +35,7 @@ Route::group([
     Route::get('/cat/{id?}', 'LandingController@index')->name('productsCat');
     //
     Route::get('/showProduct/{id}', 'LandingController@showProduct')->name('showProduct');
-    Route::get('/downloadFile/{path}', 'LandingController@downloadFile')->name('downloadFile');
+    // Route::get('/downloadFile/{path}', 'LandingController@downloadFile')->name('downloadFile');
     //
     Route::get('/home', 'HomeController@index')->name('home');
 
@@ -73,6 +73,11 @@ Route::prefix('admin')->group(function(){
   Route::post('/updateProduct', 'ProductController@update')->name('updateProduct');
   Route::delete('/deleteProduct/{id}','ProductController@destroy')->name('destroyProduct');
   Route::get('/findProduct','ProductController@find')->name('findProduct');
+
+
+  //media
+  Route::get('/files','FileController@index')->name('fileManager');
+
 });
 
 

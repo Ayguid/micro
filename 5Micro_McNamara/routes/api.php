@@ -16,3 +16,9 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+
+
+Route::post('/files/upload', 'FileController@upload');
+// Route::post('/files/destroy/{string}', 'FileController@destroy');
+Route::post('/files/destroy/{string?}', 'FileController@destroy');

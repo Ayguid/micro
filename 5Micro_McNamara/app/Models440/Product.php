@@ -20,7 +20,7 @@ class Product extends Model
 
   protected $fillable = [
     'category_id', 'title_es', 'title_en','title_pt','desc_es','desc_en','desc_pt','product_code', 'page',
-     'image_path', 'cad_2d', 'cad_3d','pdf_es','pdf_en','pdf_pt'
+     // 'image_path', 'cad_2d', 'cad_3d','pdf_es','pdf_en','pdf_pt'
   ];
 
 

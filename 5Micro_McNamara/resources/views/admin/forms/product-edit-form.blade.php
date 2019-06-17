@@ -1,7 +1,15 @@
+{{-- @php
+$product = $data['product'];
+$productFiles = $product->files;
+$productData = json_encode(
+  ['product'=>$product,
+  'productFiles'=>$productFiles]
+);
+@endphp --}}
+{{-- <drop-zone :data="{{$productData}}"></drop-zone> --}}
 
 
-
-<form class="" action="{{route('updateProduct')}}" method="post">
+<form id="editProductForm" class="" action="{{route('updateProduct')}}" method="post">
   {{ csrf_field() }}
 
 
@@ -22,7 +30,7 @@
       <div class="col-md-6">
         @foreach ($data['product']->getAttributes() as $aKey => $aValue)
 
-          @if ($aKey == $fValue && $aKey !=='category_id')
+          @if ($aKey == $fValue && $aKey !=='category_id'&&$aKey)
             <label for="">{{$fValue}}</label>
             <input class="form-control{{ $errors->has($fValue) ? ' is-invalid' : '' }}" type="text" name="{{$aKey}}" value="{{$aValue}}">
             @if ($errors->has($fValue))
@@ -31,7 +39,12 @@
               </span>
             @endif
           @endif
+
         @endforeach
+        {{-- @if ($fValue=='image_path')
+          <drop-zone :data="{{$productData}}"></drop-zone>
+        @else
+        @endif --}}
       </div>
     </div>
   @endforeach

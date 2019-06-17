@@ -12,18 +12,7 @@
 
 
 
-    {{-- {{$product}} --}}
-
-    @php
-    $product = $data['product'];
-    $productFiles = $product->files;
-    $productData = json_encode(
-      ['product'=>$product,
-      'productFiles'=>$productFiles]
-    );
-    @endphp
-    <drop-zone :data="{{$productData}}"></drop-zone>
-    @include('admin.forms.product-edit-form')
+    <drop-zone :data="null"></drop-zone>
 
 
 

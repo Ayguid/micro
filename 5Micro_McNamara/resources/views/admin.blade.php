@@ -95,7 +95,9 @@
                     </div>
 
 
-
+                    <div class="">
+                      <a href="{{route('fileManager')}}">Media Manager</a>
+                    </div>
 
                 </div>
             </div>

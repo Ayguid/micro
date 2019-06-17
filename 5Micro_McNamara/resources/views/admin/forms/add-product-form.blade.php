@@ -9,7 +9,7 @@ $original_cat= $parents[$parents->count()-1];
 @endphp
 
 
-<form class="" action="{{route('addProduct')}}" method="post">
+<form id="" class="addProductForm" action="{{route('addProduct')}}" method="post">
   {{ csrf_field() }}
 
   @php
