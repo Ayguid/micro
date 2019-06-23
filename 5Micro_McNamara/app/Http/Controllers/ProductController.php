@@ -239,7 +239,7 @@ class ProductController extends Controller
 
   public function find(Request $request)
   {
-    $products=Product::where('product_code', $request->string)->paginate(5);
+    $products=Product::where('product_code', 'like', '%' . $request->string. '%' )->paginate(5);
     $data=[
       'products'=>$products
     ];

@@ -1,4 +1,5 @@
 @extends('layouts.app')
+
 @php
   $product = $data['product'];
   $categories = $data['categories'];
@@ -64,11 +65,13 @@
 
             <div class="row">
               <div class="col-4">
-                @foreach ($product->files as $file)
-                  @if ($file->extension = 'png' || $file->extension = 'jpg')
-                    <img class="productPic" width="100%" src="{{asset('storage/product_images/'.$file->file_path)}}" alt="">
-                  @endif
-                @endforeach
+                @if ($images = $product->hasImages())
+                  @foreach ($images as $image)
+                    <img class="productPic" width="100%" src="{{asset('storage/product_images/'.$image->file_path)}}" alt="">
+                  @endforeach
+                  @else
+                    <img class="productPic" width="100%" src="{{asset('storage/product_images/'.'default.jpeg')}}" alt="">
+                @endif
               </div>
 
               <div class="col-8">
@@ -84,23 +87,39 @@
         </div>
 
         <div class="tab-pane fade" id="pdfs" role="tabpanel" aria-labelledby="pdfs-tab">
-            @foreach ($product->files as $file)
-              @if ($file->extension() == "pdf")
-                <a target="_blank" class="btn" role="button" href="{{asset('storage/pdfs/'.$file->file_path)}}" >
-                  <i class="far fa-file-pdf bigIcon"></i>{{$file->file_path}}</a>
-              @endif
-            @endforeach
+
+            @if ($pdfs = $product->hasPdfs())
+              @foreach ($pdfs as $pdf)
+                <a target="_blank" class="btn" role="button" href="{{asset('storage/pdfs/'.$pdf->file_path)}}" >
+                  <i class="far fa-file-pdf bigIcon"></i>{{$pdf->file_path}}</a>
+              @endforeach
+              @else
+                <p>
+                  No Contiene archivos Pdf.
+                </p>
+            @endif
+
         </div>
 
-        <div class="tab-pane fade" id="files3d" role="tabpanel" aria-labelledby="contact-tab">..3.
+        <div class="tab-pane fade" id="files3d" role="tabpanel" aria-labelledby="contact-tab">{{asset('storage/cads2d/FR_QBM1_G14_5U.dwg')}}
+            <a href="{{asset('storage/FR_QBM1_G14_40U.stl')}}">{{asset('storage/FR_QBM1_G14_40U.stl')}}</a>
 
+            <iframe src="//sharecad.org/cadframe/load?url=http://www.cnccookbook.com/dxf-downloads/Donkey.dxf" width="100%" height="500" frameborder="0" scrolling="no" allowfullscreen="allowfullscreen"></iframe>
+            {{-- <iframe src="//sharecad.org/cadframe/load?url=https://drive.google.com/open?id=0B-aM0jXWkJlWRTF4M1AzdHhZUjVseWZUR2czald3NGU2M3Nn" width="100%" height="500" frameborder="0" scrolling="no" allowfullscreen="allowfullscreen"></iframe> --}}
+
+            {{-- <iframe id="2d" src="https://docs.google.com/a/drive.google/viewer?url=https://drive.google.com/open?id=0B-aM0jXWkJlWRTF4M1AzdHhZUjVseWZUR2czald3NGU2M3Nn"  width="100%" height="500" frameborder="0" scrolling="no" allowfullscreen="allowfullscreen"></iframe> --}}
+
+            <iframe id="3d_viewer" src="{{asset('Online3DViewer-master/website/index.html')}}"  width="100%" height="500" frameborder="0" scrolling="no" allowfullscreen="allowfullscreen"></iframe>
         </div>
       </div>
     @endisset
 
 
 
-
   </div>
 
 @endsection
+<script type="text/javascript">
+  var hashLocate={!! json_encode(asset('storage/FR_QBM1_G14_40U.stl')) !!};
+  // console.log(hashLocate);
+</script>

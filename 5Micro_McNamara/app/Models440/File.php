@@ -11,9 +11,6 @@ class File extends Model
 
   protected $table='files';
 
-  // protected $fillable = ['file_path', 'fileable_id', 'fileable_type'
-  // ];
-
 
   public function fileable()
   {

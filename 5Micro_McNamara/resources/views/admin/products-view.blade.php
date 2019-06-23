@@ -12,35 +12,8 @@
 
 
 
-
-
-
-
     @isset($data['products'])
-
-      <div class="">
-        @foreach ($data['products'] as $prod)
-          {{$prod}}
-          {{-- <div class="mt-2 border border-secondary p-2">
-            <ul>
-              <li>{{$prod->title_es}}</li>
-            </ul>
-            @foreach ($prod->attributes()->get() as $pV)
-              {{$pV->attribute->name}}<br>
-              {{$pV->value}}<br>
-              <br>
-            @endforeach
-          <a href="{{route('editProduct', $prod->id)}}">edit</a>
-          <form class="" action="{{route('destroyProduct', $prod->id)}}" method="post">
-            @csrf
-            <input name="_method" type="hidden" value="DELETE">
-            <button type="submit" name="button">delete</button>
-          </form>
-        </div> --}}
-        @endforeach
-          {{$data['products']->links() }}
-      </div>
-
+      @include('admin.components.products-component', ['products'=>$data['products']])
     @endisset
 
 

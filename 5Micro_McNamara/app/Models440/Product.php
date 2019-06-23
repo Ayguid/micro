@@ -20,7 +20,7 @@ class Product extends Model
 
   protected $fillable = [
     'category_id', 'title_es', 'title_en','title_pt','desc_es','desc_en','desc_pt','product_code', 'page',
-     // 'image_path', 'cad_2d', 'cad_3d','pdf_es','pdf_en','pdf_pt'
+    // 'image_path', 'cad_2d', 'cad_3d','pdf_es','pdf_en','pdf_pt'
   ];
 
 
@@ -41,13 +41,10 @@ class Product extends Model
   }
 
 
-
-
   public function possibleCountries()
   {
     return Country::all();
   }
-
 
 
   public function isInCountries()
@@ -68,6 +65,33 @@ class Product extends Model
   }
 
 
+
+  public function hasImages()
+  {
+    $images =collect();
+    foreach ($this->files as $file) {
+      ($file->extension()=='jpg'||$file->extension()=='png')?$images->add($file):'';
+    }
+    if($images->count()>0) {
+      return $images;
+    }else {
+      return false;
+    }
+  }
+
+
+  public function hasPdfs()
+  {
+    $pdfs =collect();
+    foreach ($this->files as $file) {
+      ($file->extension()=='pdf')?$pdfs->add($file):'';
+    }
+    if($pdfs->count()>0) {
+      return $pdfs;
+    }else {
+      return false;
+    }
+  }
 
 
 }

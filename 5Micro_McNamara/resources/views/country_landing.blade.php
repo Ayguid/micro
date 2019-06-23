@@ -1,5 +1,4 @@
 @extends('layouts.app')
-
 @section('content')
   <div class="container">
 
@@ -44,26 +43,37 @@
     @endisset
 
 
-
     <div class="row ">
       @isset($data['products'])
+        @php
+        $admin=Auth::guard('admin');
+        @endphp
         @foreach ($data['products'] as $product)
 
           <div class="col-3 border mt-2 pt-2">
             <a href="{{route('showProduct', $product)}}">
               <h5>{{$product->title_es}} </h5>
               <h6>{{$product->product_code}}</h6>
-              @foreach ($product->files as $file)
-                @if ($file->extension = 'png' || $file->extension = 'jpg')
-                  <img class="productPic" width="100%" src="{{asset('storage/product_images/'.$file->file_path)}}" alt="">
-                @endif
-              @endforeach
+              
+              @if ($images = $product->hasImages())
+                @foreach ($images as $image)
+                  <img class="productPic" width="100%" src="{{asset('storage/product_images/'.$image->file_path)}}" alt="">
+                @endforeach
+                @else
+                  <img class="productPic" width="100%" src="{{asset('storage/product_images/'.'default.jpeg')}}" alt="">
+              @endif
+
             </a>
             <h6>{{$product->desc_es}}</h6>
             @foreach ($product->attributes as $att)
               <strong>{{$att->attribute->name}}</strong><br>
               {{$att->value}} <br>
             @endforeach
+
+            @if ($admin)
+              <a href="{{route('editProduct', $product->id)}}">edit</a>
+            @endif
+
           </div>
         @endforeach
       @endisset

@@ -94,30 +94,8 @@
 
       <br>
 
-      {{-- @if (!$category->parent_id)
-      <div id="accordion">
-        <div class="card">
-          <div class="card-header" id="headingOne">
-            <h5 class="mb-0">
-              <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                Agregar Sub Categoria
-              </button>
-            </h5>
-          </div>
-          <div id="collapseOne" class="collapse "aria-labelledby="headingOne" data-parent="#accordion">
-            <div class="card-body">
-              @include('admin.forms.category-children-form', ['cat'=>$category])
-            </div>
-          </div>
-        </div>
-      </div>
-    @endif --}}
-
-
-
 
       @if ($category->father()->count()>0)
-
         <div class="">
           <div id="accordionProduct">
             <div class="card">
@@ -138,25 +116,7 @@
         </div>
 
         <div class="">
-          @foreach ($pag = $category->products()->paginate(5) as $prod)
-            <div class="mt-2 border border-secondary p-2">
-              <ul>
-                <li>{{$prod->title_es}}</li>
-              </ul>
-              @foreach ($prod->attributes()->get() as $pV)
-                {{$pV->attribute->name}}<br>
-                {{$pV->value}}<br>
-                <br>
-              @endforeach
-            <a href="{{route('editProduct', $prod->id)}}">edit</a>
-            <form class="" action="{{route('destroyProduct', $prod->id)}}" method="post">
-              @csrf
-              <input name="_method" type="hidden" value="DELETE">
-              <button type="submit" name="button">delete</button>
-            </form>
-          </div>
-          @endforeach
-            {{$pag->links() }}
+          @include('admin.components.products-component', ['products'=>$category->products()->paginate(5)])
         </div>
 
       @endif
